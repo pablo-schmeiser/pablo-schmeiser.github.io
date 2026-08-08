@@ -1,0 +1,134 @@
+/* style.css */
+:root {
+  --primary-color: #6366f1; /* Indigo */
+  --secondary-color: #ec4899; /* Pink */
+  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+  --glass-bg: rgba(30, 41, 59, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --text-main: #f8fafc;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* Glassmorphism Classes */
+.glass-navbar {
+  background: rgba(15, 23, 42, 0.8) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Hero Section */
+.hero-section {
+  height: 60vh;
+  position: relative;
+  overflow: hidden;
+  margin-top: 56px; /* navbar height */
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
+  z-index: -1;
+  animation: pulse 10s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+.btn-primary:hover {
+  background-color: #4f46e5;
+  border-color: #4f46e5;
+}
+.text-primary {
+  color: var(--primary-color) !important;
+}
+.badge-primary {
+  background-color: var(--primary-color) !important;
+}
+
+/* Timeline */
+.timeline {
+  border-left: 2px solid var(--primary-color);
+  padding-left: 20px;
+  margin-left: 10px;
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 30px;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -27px;
+  top: 5px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  border: 2px solid #1e1b4b;
+}
+
+/* Profile Image */
+.profile-img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border: 3px solid var(--primary-color);
+  padding: 3px;
+}
+
+/* Badges */
+.skill-badge {
+  font-size: 0.85rem;
+  padding: 8px 12px;
+  transition: transform 0.2s ease;
+}
+.skill-badge:hover {
+  transform: scale(1.1);
+}
+
+/* Override Text Muted for Dark Theme */
+.text-muted {
+  color: #94a3b8 !important;
+}
