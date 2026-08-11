@@ -4,6 +4,7 @@ import markdown
 import yaml
 import json
 import hashlib
+from logger import _logger
 
 TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
@@ -102,9 +103,11 @@ def build_blog():
         out_filepath = filepath.replace('.md', '.html')
         
         if cache.get(filepath) == current_hash and os.path.exists(out_filepath):
+            _logger.info(f"Cache hit for {filepath}, skipping build.")
             continue
             
         changed = True
+        _logger.info(f"Building {filepath} -> {out_filepath}")
         with open(filepath, 'r', encoding='utf-8') as f:
             content = f.read()
             
@@ -131,7 +134,7 @@ def build_blog():
             f.write(final_html)
             
         cache[filepath] = current_hash
-        print(f"Built {out_filepath}")
+        _logger.info(f"Built {out_filepath}")
         
     if changed:
         with open('.build_cache.json', 'w', encoding='utf-8') as f:

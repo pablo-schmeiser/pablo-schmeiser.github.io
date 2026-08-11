@@ -4,6 +4,7 @@ import json
 import hashlib
 from bs4 import BeautifulSoup, NavigableString
 from deep_translator import GoogleTranslator
+from logger import _logger
 
 def get_hash(filepath):
     with open(filepath, 'rb') as f:
@@ -32,9 +33,10 @@ def translate_html():
         de_path = en_path.replace('en/', 'de/', 1)
         
         if cache.get(en_path) == current_hash and os.path.exists(de_path):
+            _logger.info(f"Cache hit for {en_path}, skipping translation.")
             continue
             
-        print(f"Translating {en_path} -> {de_path}...")
+        _logger.info(f"Translating {en_path} -> {de_path}...")
         changed = True
         
         with open(en_path, 'r', encoding='utf-8') as f:
@@ -70,7 +72,7 @@ def translate_html():
                         if translated_text:
                             element.replace_with(translated_text)
                     except Exception as e:
-                        pass
+                        _logger.exception(f"Translation failed for '{text}', {e}")
         
         os.makedirs(os.path.dirname(de_path), exist_ok=True)
         with open(de_path, 'w', encoding='utf-8') as f:
