@@ -44,6 +44,9 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python scripts/llm_review.py
 
+      - name: Generate Blog Indexes
+        run: python scripts/generate_blog_index.py
+
       - name: Create Pull Request for Translations
         id: cpr
         uses: peter-evans/create-pull-request@v8
