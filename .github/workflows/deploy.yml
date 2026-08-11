@@ -39,7 +39,7 @@ jobs:
         run: python scripts/translate.py
 
       - name: LLM Translation Review
-        if: ${{ !contains(github.event.head_commit.message, 'chore: update translations') && github.actor != 'github-actions[bot]' }}
+        if: "${{ !contains(github.event.head_commit.message, 'chore: update translations') && github.actor != 'github-actions[bot]' }}"
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python scripts/llm_review.py
