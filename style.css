@@ -122,10 +122,12 @@ h1, h2, h3, h4, h5, h6 {
 .skill-badge {
   font-size: 0.85rem;
   padding: 8px 12px;
-  transition: transform 0.2s ease;
+  display: inline-block;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .skill-badge:hover {
-  transform: scale(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* Override Text Muted for Dark Theme */

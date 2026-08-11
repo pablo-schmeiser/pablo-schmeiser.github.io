@@ -1,20 +1,26 @@
 import os
 import glob
-import json
-import hashlib
 from google import genai
 from logger import _logger
+from hash_utils import get_hash, load_cache, save_cache
 
-def get_hash(filepath):
-    with open(filepath, 'rb') as f:
-        return hashlib.md5(f.read()).hexdigest()
+LLM_REVIEW_PROMPT = """You are an expert German translator and web developer.
+Review the following German HTML translation of an English original. 
+If the translation needs improvement (better phrasing, fixing broken HTML, etc.), return the ENTIRE improved German HTML code. 
+If the translation is already perfect, return exactly the word "PERFECT". Do NOT wrap your output in markdown code blocks.
 
-def get_modified_de_files():
-    cache = {}
-    if os.path.exists('.llm_review_cache.json'):
-        with open('.llm_review_cache.json', 'r', encoding='utf-8') as f:
-            cache = json.load(f)
-            
+English Original:
+{en_html}
+
+German Translation:
+{de_html}
+"""
+
+def get_modified_de_files(cache):
+    """
+    Finds all German HTML files that have been modified or don't match 
+    their hash in the cache, indicating they need an LLM review.
+    """
     files_to_review = []
     de_files = glob.glob('de/**/*.html', recursive=True)
     
@@ -26,9 +32,14 @@ def get_modified_de_files():
         else:
             _logger.info(f"Cache hit for {filepath}, skipping.")
             
-    return files_to_review, cache
+    return files_to_review
 
 def review_single_translation(client, de_path, en_path):
+    """
+    Reviews a single translation file pair using the Gemini API.
+    If the LLM suggests improvements, writes the new content back to the German file.
+    Returns (success_boolean, new_file_hash).
+    """
     if not os.path.exists(de_path) or not os.path.exists(en_path):
         _logger.info(f"Missing EN or DE file for {de_path}")
         return False, None
@@ -40,23 +51,16 @@ def review_single_translation(client, de_path, en_path):
     with open(de_path, 'r', encoding='utf-8') as f:
         de_html = f.read()
         
-    prompt = f"""You are an expert German translator and web developer.
-Review the following German HTML translation of an English original. 
-If the translation needs improvement (better phrasing, fixing broken HTML, etc.), return the ENTIRE improved German HTML code. 
-If the translation is already perfect, return exactly the word "PERFECT". Do NOT wrap your output in markdown code blocks.
-
-English Original:
-{en_html}
-
-German Translation:
-{de_html}
-"""
+    prompt = LLM_REVIEW_PROMPT.format(en_html=en_html, de_html=de_html)
+    
     try:
         response = client.models.generate_content(
             model='gemini-3.6-flash',
             contents=prompt,
         )
         result = response.text.strip()
+        
+        # Clean up possible markdown code block formatting
         if result.startswith("```html"):
             result = result[7:]
         if result.startswith("```"):
@@ -82,8 +86,11 @@ def review_translations():
         return
         
     client = genai.Client(api_key=api_key)
-    files_to_review, cache = get_modified_de_files()
     
+    cache_file = '.llm_review_cache.json'
+    cache = load_cache(cache_file)
+    
+    files_to_review = get_modified_de_files(cache)
     changed_cache = False
     
     for de_path in files_to_review:
@@ -95,8 +102,7 @@ def review_translations():
             changed_cache = True
             
     if changed_cache:
-        with open('.llm_review_cache.json', 'w', encoding='utf-8') as f:
-            json.dump(cache, f, indent=2)
+        save_cache(cache, cache_file)
 
 if __name__ == "__main__":
     review_translations()
