@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Hello World: Building a Multilingual Blog and Home Page - Pablo Schmeiser Blog</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.min.css"
+    />
+    <link rel="stylesheet" href="/style.css" />
+
+    <style>
+      .article-content { font-size: 1.1rem; line-height: 1.8; color: #cbd5e1; }
+      .article-content h2, .article-content h3 { color: #f8fafc; margin-top: 2rem; margin-bottom: 1rem; font-weight: 700; }
+      .article-content p { margin-bottom: 1.5rem; }
+    </style>
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-dark bg-dark glass-navbar fixed-top"
+    >
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="/en/">Pablo Schmeiser</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-mdb-collapse-init
+          data-mdb-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/en/">Resume</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/en/blog/"
+                >Blog</a
+              >
+            </li>
+            <li class="nav-item ms-3 language-switcher">
+              <a class="nav-link fw-bold" href="/de/blog/posts/hello-world.html"
+                ><span class="badge rounded-pill bg-light text-dark"
+                  >🇩🇪 DE</span
+                ></a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div
+      class="hero-section text-center text-white d-flex align-items-center justify-content-center"
+      style="height: 50vh"
+    >
+      <div class="hero-content container">
+        <span class="badge badge-primary rounded-pill skill-badge mb-3"
+          >Engineering</span
+        >
+        <h1 class="display-4 fw-bold mb-3">Hello World: Building a Multilingual Blog and Home Page</h1>
+        <p class="text-muted">
+          <i class="far fa-calendar-alt me-2"></i> Aug 11, 2026 &nbsp;&bull;&nbsp;
+          3 min read
+        </p>
+      </div>
+    </div>
+
+    <main class="container my-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="card glass-card">
+            <div class="card-body p-5 article-content">
+              <p>Welcome to the first post on my new blog! I want to share a behind-the-scenes look at how this site is built, the reasoning behind my technology choices, and where I plan to take it next.</p>
+<h2>How This Project Works</h2>
+<p>This blog is built from the ground up to be lightweight, easy to maintain, and automatically translated into multiple languages. Here is the breakdown of the architecture:</p>
+<ul>
+<li><strong>Static Site Hosting:</strong> The site is hosted on GitHub Pages, ensuring high availability, speed, no server maintenance, high security, and zero hosting costs.</li>
+<li><strong>Content Creation:</strong> All posts are written in standard Markdown (<code>.md</code> files) which makes formatting effortless and keeps the content independent of the presentation layer.</li>
+<li><strong>Build Pipeline:</strong> When I push a new Markdown file to the <code>main</code> branch, a GitHub Actions workflow kicks off. A custom Python script (<code>build_blog.py</code>) reads the Markdown, extracts the YAML frontmatter, and injects the parsed HTML into a sleek, glassmorphism-styled template.</li>
+<li><strong>Automated Translation:</strong> Another Python script (<code>translate.py</code>) detects changes and uses <code>deep-translator</code> to translate the new content.</li>
+<li><strong>LLM Review:</strong> Simple machine translation can sometimes miss nuances. To ensure high quality, I've integrated Gemini (<code>llm_review.py</code>) to review and refine the translations. The workflow then automatically creates a Pull Request with the translated HTML files, ready for my final approval.</li>
+</ul>
+<h2>Why I Chose This Tooling</h2>
+<p>When deciding on the stack, I had a few key priorities: <strong>Simplicity, Speed, and Automation</strong>.</p>
+<ol>
+<li><strong>No Database, No Headaches:</strong> By choosing a static site approach over a CMS like WordPress, I eliminated database management, security vulnerabilities (like <a href="https://github.com/0xsha/wp2shell">CVE-2026-63030 + CVE-2026-60137</a>), and slow page loads.</li>
+<li><strong>Python for the Pipeline:</strong> Python is perfect for scripting build and translation tasks. Libraries like <code>BeautifulSoup4</code> for parsing HTML, <code>PyYAML</code> for frontmatter, and the <code>google-genai</code> SDK for the LLM review made the implementation straightforward and maintainable.</li>
+<li><strong>AI-Powered Localization:</strong> Manually translating technical posts is time-consuming. Leveraging standard translation APIs backed by an LLM review gives me the best of both worlds: speed and linguistic accuracy, allowing me to reach a wider audience effortlessly.</li>
+</ol>
+<h2>What Comes Next</h2>
+<p>Now that the core infrastructure is up and running, here is what I have planned:</p>
+<ul>
+<li><strong>More Content:</strong> Expect more posts about my projects, software engineering deep dives, tutorials and rants on technical and especially security and AI topics.</li>
+<li><strong>Enhanced Styling:</strong> While I love the current dark-mode glassmorphism aesthetic, I plan to potentially add a light-mode toggle.</li>
+<li><strong>Interactive Elements:</strong> I might add client-side search and filtering for the blog posts as the content grows.</li>
+</ul>
+<p>Thanks for stopping by, and stay tuned for more!</p>
+              <hr class="text-white my-5" />
+              <div class="d-flex justify-content-between align-items-center">
+                <a href="/en/blog/" class="btn btn-outline-light btn-rounded"
+                  ><i class="fas fa-arrow-left me-2"></i> Back to Blog</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer
+      class="bg-dark text-center text-white mt-auto glass-card"
+      style="border-radius: 0"
+    >
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+        © 2026 Pablo Schmeiser
+      </div>
+    </footer>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"
+    ></script>
+  </body>
+</html>
