@@ -1,0 +1,5 @@
+beautifulsoup4==4.15.0
+deep-translator==1.11.4
+google-genai==2.17.0
+Markdown==3.10.3
+PyYAML==6.0.3
