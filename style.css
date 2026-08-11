@@ -124,6 +124,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 8px 12px;
   display: inline-block;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: #f8f9fa;
 }
 .skill-badge:hover {
   transform: translateY(-2px);
