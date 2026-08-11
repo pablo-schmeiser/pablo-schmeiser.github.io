@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Blog - Pablo Schmeiser</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.min.css"
+    />
+    <link rel="stylesheet" href="/style.css" />
+
+    <style>
+      .post-card { transition: transform 0.2s ease, box-shadow 0.2s ease; cursor: pointer; }
+      .post-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important; }
+      .post-link { text-decoration: none; color: inherit; display: block; height: 100%; }
+      .card-text-excerpt { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; color: #cbd5e1; }
+    </style>
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-dark bg-dark glass-navbar fixed-top"
+    >
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="/en/">Pablo Schmeiser</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-mdb-collapse-init
+          data-mdb-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/en/">Resume</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/en/blog/"
+                >Blog</a
+              >
+            </li>
+            <li class="nav-item ms-3 language-switcher">
+              <a class="nav-link fw-bold" href="/de/blog/"
+                ><span class="badge rounded-pill bg-light text-dark"
+                  >🇩🇪 DE</span
+                ></a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div
+      class="hero-section text-center text-white d-flex align-items-center justify-content-center"
+      style="height: 40vh"
+    >
+      <div class="hero-content container">
+        <h1 class="display-3 fw-bold mb-3">Blog</h1>
+        <p class="text-muted fs-5">My latest thoughts, tutorials, and technical deep-dives.</p>
+      </div>
+    </div>
+
+    <main class="container my-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="row row-cols-1 row-cols-md-2 g-4">
+            
+            <div class="col">
+              <a href="/en/blog/posts/hello-world.html" class="post-link">
+                <div class="card glass-card h-100 post-card">
+                  <div class="card-body p-4">
+                    <span class="badge badge-primary rounded-pill skill-badge mb-3">Engineering</span>
+                    <h4 class="card-title fw-bold text-white mb-3">Hello World: Building a Multilingual Blog and Home Page</h4>
+                    <p class="card-text card-text-excerpt text-muted mb-4">Welcome to the first post on my new blog! I want to share a behind-the-scenes look at how this site is built, the reasoning behind my technology choices, and where I plan to take it next.</p>
+                    <div class="mt-auto">
+                      <small class="text-primary"><i class="far fa-calendar-alt me-1"></i> Aug 11, 2026  • 
+          3 min read</small>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+        
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer
+      class="bg-dark text-center text-white mt-auto glass-card"
+      style="border-radius: 0"
+    >
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+        © 2026 Pablo Schmeiser
+      </div>
+    </footer>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"
+    ></script>
+  </body>
+</html>
